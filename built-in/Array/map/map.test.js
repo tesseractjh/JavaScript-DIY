@@ -16,14 +16,9 @@ describe('Array.prototype.map 테스트', () => {
   });
 
   test('array 테스트', () => {
-    const arr1 = [1, 2, 3, 4, 5];
-    const arr2 = [1, 2, 3, 4, 5];
-    const result1 = arr1.myMap((_, __, array) => array.push(0));
-    const result2 = arr2.map((_, __, array) => array.push(0));
-    expect(arr1).toEqual([1, 2, 3, 4, 5, 0, 0, 0, 0, 0]);
-    expect(arr2).toEqual([1, 2, 3, 4, 5, 0, 0, 0, 0, 0]);
-    expect(result1).toEqual([6, 7, 8, 9, 10]);
-    expect(result2).toEqual([6, 7, 8, 9, 10]);
+    const arr = [1, 2, 3, 4, 5];
+    expect(arr.myMap((_, __, array) => array).every(value => value === arr))
+      .toBe(true);
   });
 
   test('희소 배열 테스트', () => {
