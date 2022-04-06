@@ -27,6 +27,37 @@ describe('Array.prototype.map 테스트', () => {
     expect(arr.myMap((_, i) => i)).toEqual(arr.map((_, i) => i));
   });
 
+  [
+    [
+      '순회 중 추가된 배열 요소 테스트',
+      (v, i, array) => {
+        array.push(0);
+        return v;
+      }
+    ],
+    [
+      '순회 중 배열 요소 변경 테스트', 
+      (v, i, array) => {
+        array[i + 2] = 0;
+        return v;
+      }
+    ],
+    [
+      '순회 중 배열 요소 삭제 테스트', 
+      (v, i, array) => {
+        delete array[i + 2];
+        return v;
+      }
+    ]
+  ].forEach(([testName, callback]) => {
+    test(testName, () => {
+      const arr1 = [1, 2, 3, 4, 5];
+      const arr2 = [1, 2, 3, 4, 5];
+      expect(arr1.myMap(callback))
+       .toEqual(arr2.map(callback));
+    });
+  });
+
   test('thisArg 테스트', () => {
     const arr = [1, 2, 3, 4, 5];
     const obj = {
